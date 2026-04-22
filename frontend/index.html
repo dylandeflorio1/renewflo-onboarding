@@ -468,17 +468,11 @@
           throw new Error("Missing Apps Script Web App URL in FORM_CONFIG.submitEndpoint.");
         }
 
-        const response = await fetch(FORM_CONFIG.submitEndpoint, {
+        await fetch(FORM_CONFIG.submitEndpoint, {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
+          mode: "no-cors",
           body: JSON.stringify(payload)
         });
-
-        if (!response.ok) {
-          throw new Error("Upload failed with status " + response.status);
-        }
 
         confetti({ particleCount: 220, spread: 100, origin: { y: 0.65 } });
         document.getElementById("form-header").classList.add("hidden");
